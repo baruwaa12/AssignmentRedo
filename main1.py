@@ -1,37 +1,34 @@
-## User enters Flight Specification
-## Check if the entry fits the required length of for the program - GLA 0 25 S E
+## User enters Flight Specification - GLA 0 25 S E
 
 flightSpec = str(input("Enter a flight specification? "))
 
-if len(flightSpec) < 12:
-  print("Incorrect specification length, restart program and enter again.")
+print(flightSpec)
+
+## Key Variables
+passAge = int(flightSpec[6:8])
+destination = str(flightSpec[0:3])
+numOfBags = int(flightSpec[4])
+MealChosen = str(flightSpec[9])
 
 ## Find the number of bags and calculate the bag cost
 
-numOfBags = int(flightSpec[4])
 bagCost = 0
 
 if numOfBags <= 1:
     bagCost = bagCost
-    print(bagCost)
 else:
     bagCost = (numOfBags - 1) * 20
     print(bagCost)
 
+print("bagCost: ", bagCost)
 
 ## Check for the destination
 ## Find out the current flight cost and see if the child discount can be applied
 ## Check an appropriate age has been given.
-  
 BasicFlightCostAMS = 150
 BasicFlightCostGLA = 80
 CurrentFlightCost = 0
 
-passAge = int(flightSpec[6:8])
-destination = str(flightSpec[0:3])
-
-if passAge <= 0 or passAge > 99:
-  print("Unrealistic age given, restart program and try again. ")
 
 if destination == "GLA":
   if passAge <= 15:
@@ -52,7 +49,6 @@ MealCostS = 10
 MealCostV = 12
 FinalMealCost = 0
 
-MealChosen = str(flightSpec[9])
 
 if MealChosen == "S":
   if passAge <= 15:
@@ -74,7 +70,7 @@ FinalFlightCost = 0
 
 if SeatType == "F":
   FinalBasicFlightCost = CurrentFlightCost * 6
-  print(FinalBasicFlightCost)
 else:
   FinalBasicFlightCost = CurrentFlightCost
-  print(FinalBasicFlightCost)
+
+print("FinalBasicFlightCost = ", FinalBasicFlightCost)
