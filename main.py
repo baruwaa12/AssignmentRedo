@@ -2,7 +2,7 @@
 
 #===============
 
-def bagCost(numOfBags):
+def bagCost(FlightSpec):
   bagCost = 0
   if numOfBags <= 1:
     bagCost = bagCost
@@ -15,31 +15,47 @@ def bagCost(numOfBags):
 
 #================
 
-def getCurrentFlightCost(passAge, destination):
+def getFinalBasicFlightCost(FlightSpec):
   BasicFlightCostAMS = 150
   BasicFlightCostGLA = 80
-  CurrentFlightCost = 0
-
+  FinalBasicFlightCost1 = 0
+  FinalBasicFlightCost2 = 0
+  SeatType = FlightSpec[11]
+  destination = FlightSpec[0:3]
+  passAge = int(FlightSpec[6:8])
+  
+  
+  
   if destination == "GLA":
     if passAge <= 15:
-      CurrentFlightCost = BasicFlightCostGLA / 2
-      print(CurrentFlightCost)
+      FinalBasicFlightCost1 = BasicFlightCostGLA / 2
+      print(FinalBasicFlightCost1)
     else:
-      CurrentFlightCost = BasicFlightCostGLA
-      print(CurrentFlightCost)
+      FinalBasicFlightCost1 = BasicFlightCostGLA
+      print(FinalBasicFlightCost1)
       
-
+  
   if destination == "AMS":
     if passAge <= 15:
-      CurrentFlightCost = BasicFlightCostAMS / 2
+      FinalBasicFlightCost1 = BasicFlightCostAMS / 2
+      print(FinalBasicFlightCost1)
     else:
-      CurrentFlightCost = BasicFlightCostAMS
+      FinalBasicFlightCost1 = BasicFlightCostAMS
+      print(FinalBasicFlightCost1)
+
+  
+  if SeatType == "F":
+    FinalBasicFlightCost2 = FinalBasicFlightCost1 * 6
+    print(FinalBasicFlightCost2)
+  elif SeatType == "E":
+    FinalBasicFlightCost1 = FinalBasicFlightCost1
+    print(FinalBasicFlightCost1)
     
-  return CurrentFlightCost
+  return FinalBasicFlightCost1
 
 #===============
 
-def getChosenMeal(passAge, MealChosen):
+def getChosenMeal(FlightSpec):
   MealCostS = 10
   MealCostV = 12
   FinalMealCost = 0
@@ -61,25 +77,31 @@ def getChosenMeal(passAge, MealChosen):
 
 #===============
 
-def isFirstClass(CurrentFlightCost, SeatType):
+def isFirstClass(FlightSpec):
   FinalBasicFlightCost = 0
-
+  CurrentFlightCost = getCurrentFlightCost
+  
+  SeatType = FlightSpec[11]
+  
   if SeatType == "F":
     FinalBasicFlightCost = CurrentFlightCost * 6
-  else:
+  elif SeatType == "E":
     FinalBasicFlightCost = CurrentFlightCost
 
-  print("FinalBasicFlightCost = ", FinalBasicFlightCost)
+  # print("FinalBasicFlightCost = ", FinalBasicFlightCost)
   return FinalBasicFlightCost
 
 #===============
 
-getChosenMeal(1, "S")
-isFirstClass(80, "F")
-getCurrentFlightCost(1, "GLA")
-bagCost(0)
+def totalFlightCost():
+  FlightSpec = input("Please enter your specfication? ")
+  result = isFirstClass(FlightSpec) + getChosenMeal(FlightSpec) + getCurrentFlightCost(FlightSpec) + bagCost(FlightSpec) 
+  return result
+#===============
 
 
 
+
+getFinalBasicFlightCost("AMS 0 11 S F")
 
 
